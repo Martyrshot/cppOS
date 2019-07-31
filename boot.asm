@@ -1,6 +1,6 @@
+section .boot
 bits 16
-org 0x7c00 ; I'm guessing this is for the magic location qemu looks for code. Need to read more
-
+global boot
 boot:
 	mov ax, 0x2401
 	int 0x15 ; enables A20 gate. The A20 gate enables a larger memory space. Not present on modern intel chips
@@ -13,7 +13,7 @@ boot:
 	mov [disk], dl ; store the disk location in memory for later
 	
 	mov ah, 0x2 ; request to read sectors
-	mov al, 1 ; sectors to read
+	mov al, 6 ; sectors to read
 	mov ch, 0 ; cylinder idx
 	mov dh, 0 ; head idx
 	mov cl, 2 ; sector idx
@@ -74,6 +74,13 @@ boot2:
 	add ebx, 2 ; increment index buffer
 	jmp .loop
 halt:
+	mov esp, kernel_stack_top
+	extern kmain
+	call kmain
 	cli ; clear interrupts
 	hlt ; halt
-times 1024 - ($-$$) db 0  
+	section .bss
+	align 4
+kernel_stack_bottom: equ $
+	resb 16384 ; 16kb
+kernel_stack_top:
