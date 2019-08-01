@@ -8,9 +8,9 @@ run: kerncpp
 bootasm: boot.asm
 	nasm -f elf32 boot.asm -o boot.o
 
-kerncpp: bootasm kernmain.cpp
-	i386-elf-g++ kernmain.cpp boot.o -o kernel.bin -nostdlib -ffreestanding -std=c++11 -mno-red-zone \
-	-fno-exceptions -nostdlib -fno-rtti -Wall -Wextra -Werror -T link.ld \-Iinclude/
+kerncpp: bootasm proc.cpp kernmain.cpp
+	i386-elf-g++ proc.cpp kernmain.cpp boot.o -o kernel.bin -nostdlib -ffreestanding -std=c++11 \
+	-mno-red-zone -fno-exceptions -nostdlib -fno-rtti -Wall -Wextra -Werror -T link.ld \-Iinclude/
 
 
 clean:
