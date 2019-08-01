@@ -35,14 +35,14 @@ boot:
 gdt_start:
 	dq 0x0
 gdt_code:
-	dw 0xFFFF ; base describes where segment begins -- limit_low, base_low
+	dw 0x7BFF ; base describes where segment begins -- limit_low, base_low
 	dw 0x0 ; base_middle, access, flags, base_high
 	db 0x0 ; Base 16:23
 	db 10011010b ; Access layout -- present, ring level, 1, executable, direction, read/write/accessed
 	db 11001111b ; flags layout -- granularity, size, 0, 0, limit_high
 	db 0x0 ; Base 24:41
 gdt_data:
-	dw 0xFFFF ; base describes where segment begins -- limit_low, base_low
+	dw 0x7BFF ; base describes where segment begins -- limit_low, base_low
 	dw 0x0 ; base_middle, access, flags, base_high
 	db 0x0 ; Base 16:23
 	db 10010010b ; Access layout -- present, ring level, 1, executable, direction, read/write/accessed
@@ -79,8 +79,8 @@ halt:
 	call kmain
 	cli ; clear interrupts
 	hlt ; halt
-	section .bss
-	align 4
+section .bss
+align 4
 kernel_stack_bottom: equ $
 	resb 16384 ; 16kb
 kernel_stack_top:
