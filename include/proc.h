@@ -1,12 +1,12 @@
 #ifndef __PROC_H__
 #define __PROC_H__
 #include<stdint.h>
-
+#pragma once
 
 enum ProcState {EMBRIO, SLEEPING, RUNNING, RUNNABLE, ZOMBIE, FREE};
 
 
-//uint32_t numProc = 0;
+extern uint32_t numProc;
 
 
 /*

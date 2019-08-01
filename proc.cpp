@@ -1,6 +1,6 @@
 #include<proc.h>
 
-extern uint32_t numProc;
+uint32_t numProc = 0;
 
 /****************************************************************************************************
  * PROC IMPLEMENTATION
@@ -16,8 +16,8 @@ Proc::Proc(uint32_t PID, bool isKproc) {
 		//TODO figure out how to do user level memory
 	}
 	this->state = EMBRIO;
-	//this->PID = numProc;
-	//numProc++;
+	this->PID = numProc;
+	numProc++;
 }
 
 Proc::~Proc() {
