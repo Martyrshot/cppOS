@@ -72,4 +72,52 @@ public:
 	 */
 	bool setStack(uint32_t stack);
 };
+
+/*
+ * The Process table class. This stores all active processes for the kernel to access
+ */
+class PTable {
+private:
+	TrimmingLinkedList<Proc> procs;
+	Proc *curProc;
+	uint32_t nextPIDtoUse;
+public:
+	Ptable();
+	~Ptable();
+
+	/*
+	 * Returns the number of processes active
+	 */
+	uint32_t numProcs();
+
+	/*
+	 * returns the currently running process' PCB
+	 */
+	Proc *getCurProc();
+
+	/*
+	 * Adds a PCB to the process table
+	 */
+	void addProc(Proc newProc);
+
+	/*
+	 * returns the next process' PCB in the process table
+	 */
+	Proc *nextProc();
+
+	/*
+	 * returns the next process' PCB in the process table
+	 */
+	Proc *prevProc();
+
+	/*
+	 * returns the first process' PCB in the process table
+	 */
+	Proc *firstProc();
+
+	/*
+	 * returns the lastt process' PCB in the process table
+	 */
+	Proc *lastProc();
+};
 #endif
