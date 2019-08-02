@@ -1,5 +1,5 @@
 # funOS
-A project to practice and develop fun operating system ideas.
+A project to practice and develop operating system ideas.
 
 ## Prereqs:
 Make sure the qemu is installed! I am developing and testing using the version from homebrew. I also use a toolchain provided by the bootloader author for compiling 32bit x86.
